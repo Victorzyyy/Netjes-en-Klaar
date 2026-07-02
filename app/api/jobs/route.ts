@@ -25,12 +25,69 @@ async function toAttachment(file: File) {
 
 export async function POST(request: Request) {
   const formData = await request.formData();
+  const lang = value(formData, "lang") === "ar" ? "ar" : "nl";
+  const copy =
+    lang === "ar"
+      ? {
+          fileTooLarge: "السيرة الذاتية كبيرة جداً. اجعل الملف أقل من 5 ميغابايت.",
+          required: "يرجى إدخال الاسم ووسيلة التواصل ومكان السكن على الأقل.",
+          notConfigured:
+            "نموذج التوظيف غير مربوط بالإرسال بعد. يمكنك الاتصال بنا أو مراسلتنا مباشرة وسنساعدك بشكل صحيح.",
+          sendFailed: "تعذر الإرسال حالياً. يمكنك مراسلتنا أو الاتصال بنا مباشرة.",
+          success: "تم إرسال طلبك. سنتواصل معك إذا كانت هناك خطوة مناسبة.",
+          subjectPrefix: "طلب عمل جديد عبر الموقع",
+          labels: {
+            name: "الاسم",
+            contact: "التواصل",
+            city: "مكان السكن",
+            availability: "التوفر",
+            experience: "الخبرة",
+            drivingLicense: "رخصة القيادة",
+            hasCar: "سيارة",
+            vca: "شهادة VCA",
+            languages: "اللغات",
+            levels: "المستويات",
+            roleInterest: "نوع الطلب",
+            cv: "السيرة الذاتية",
+            message: "رسالة التعريف",
+          },
+          empty: "غير مُدخل",
+          noCv: "غير مرفق",
+          noMessage: "لا توجد رسالة إضافية",
+        }
+      : {
+          fileTooLarge: "Je CV is te groot. Houd het bestand onder 5 MB.",
+          required: "Vul in ieder geval naam, contact en woonplaats in.",
+          notConfigured:
+            "De sollicitatie is nog niet gekoppeld voor verzending. Bel of mail ons direct, dan zorgen we dat je goed terechtkomt.",
+          sendFailed: "Versturen lukt nu even niet. Mail of bel ons gerust direct.",
+          success: "Je sollicitatie is verstuurd. We nemen contact op als er een passende stap is.",
+          subjectPrefix: "Nieuwe sollicitatie via website",
+          labels: {
+            name: "Naam",
+            contact: "Contact",
+            city: "Woonplaats",
+            availability: "Beschikbaarheid",
+            experience: "Ervaring",
+            drivingLicense: "Rijbewijs",
+            hasCar: "Auto",
+            vca: "VCA",
+            languages: "Talen",
+            levels: "Niveaus",
+            roleInterest: "Interesse",
+            cv: "CV",
+            message: "Sollicitatiebrief",
+          },
+          empty: "Niet ingevuld",
+          noCv: "Niet meegestuurd",
+          noMessage: "Geen extra toelichting",
+        };
 
   const cv = formData.get("cv");
   const cvFile = cv instanceof File && cv.size > 0 ? cv : null;
 
   if (cvFile && cvFile.size > 5 * 1024 * 1024) {
-    return NextResponse.json({ ok: false, message: "Je CV is te groot. Houd het bestand onder 5 MB." }, { status: 400 });
+    return NextResponse.json({ ok: false, message: copy.fileTooLarge }, { status: 400 });
   }
 
   const payload = {
@@ -50,7 +107,7 @@ export async function POST(request: Request) {
   };
 
   if (!payload.name || !payload.contact || !payload.city) {
-    return NextResponse.json({ ok: false, message: "Vul in ieder geval naam, contact en woonplaats in." }, { status: 400 });
+    return NextResponse.json({ ok: false, message: copy.required }, { status: 400 });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -62,7 +119,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        message: "De sollicitatie is nog niet gekoppeld voor verzending. Bel of mail ons direct, dan zorgen we dat je goed terechtkomt.",
+        message: copy.notConfigured,
       },
       { status: 503 },
     );
@@ -78,23 +135,23 @@ export async function POST(request: Request) {
       from: contactFromEmail,
       to: [contactToEmail],
       reply_to: payload.contact.includes("@") ? payload.contact : undefined,
-      subject: `Nieuwe sollicitatie via website - ${payload.name}`,
+      subject: `${copy.subjectPrefix} - ${payload.name}`,
       text: [
-        `Naam: ${payload.name}`,
-        `Contact: ${payload.contact}`,
-        `Woonplaats: ${payload.city}`,
-        `Beschikbaarheid: ${payload.availability || "Niet ingevuld"}`,
-        `Ervaring: ${payload.experience || "Niet ingevuld"}`,
-        `Rijbewijs: ${payload.drivingLicense || "Niet ingevuld"}`,
-        `Auto: ${payload.hasCar || "Niet ingevuld"}`,
-        `VCA: ${payload.vca || "Niet ingevuld"}`,
-        `Talen: ${payload.languages.length ? payload.languages.join(", ") : "Niet ingevuld"}`,
-        `Niveaus: ${payload.languageLevels || "Niet ingevuld"}`,
-        `Interesse: ${payload.roleInterest || "Niet ingevuld"}`,
-        `CV: ${payload.cvFileName || "Niet meegestuurd"}`,
+        `${copy.labels.name}: ${payload.name}`,
+        `${copy.labels.contact}: ${payload.contact}`,
+        `${copy.labels.city}: ${payload.city}`,
+        `${copy.labels.availability}: ${payload.availability || copy.empty}`,
+        `${copy.labels.experience}: ${payload.experience || copy.empty}`,
+        `${copy.labels.drivingLicense}: ${payload.drivingLicense || copy.empty}`,
+        `${copy.labels.hasCar}: ${payload.hasCar || copy.empty}`,
+        `${copy.labels.vca}: ${payload.vca || copy.empty}`,
+        `${copy.labels.languages}: ${payload.languages.length ? payload.languages.join(", ") : copy.empty}`,
+        `${copy.labels.levels}: ${payload.languageLevels || copy.empty}`,
+        `${copy.labels.roleInterest}: ${payload.roleInterest || copy.empty}`,
+        `${copy.labels.cv}: ${payload.cvFileName || copy.noCv}`,
         "",
-        "Toelichting:",
-        payload.message || "Geen extra toelichting",
+        `${copy.labels.message}:`,
+        payload.message || copy.noMessage,
       ].join("\n"),
       attachments: cvFile ? [await toAttachment(cvFile)] : undefined,
     }),
@@ -104,13 +161,13 @@ export async function POST(request: Request) {
     const errorText = await emailResponse.text();
     console.error("Job application delivery failed.", errorText);
     return NextResponse.json(
-      { ok: false, message: "Versturen lukt nu even niet. Mail of bel ons gerust direct." },
+      { ok: false, message: copy.sendFailed },
       { status: 502 },
     );
   }
 
   return NextResponse.json({
     ok: true,
-    message: "Je sollicitatie is verstuurd. We nemen contact op als er een passende stap is.",
+    message: copy.success,
   });
 }

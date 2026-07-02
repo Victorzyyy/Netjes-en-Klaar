@@ -5,8 +5,11 @@ import { SubpageHeader } from "@/components/subpage-header";
 export const metadata: Metadata = {
   title: "Industriele schoonmaak | Netjes & Klaar",
   description:
-    "Industriele schoonmaak voor productieomgevingen, fabrieken en technische ruimtes. Afstemming op veiligheid, looproutes, ploegendienst en reiniging per zone.",
+    "Industriele schoonmaak voor productieomgevingen, fabrieken en technische ruimtes. Afstemming op veiligheid, looproutes, ploegendienst en reiniging per zone, ook met Arabische taaloptie op de website.",
   keywords: ["industriele schoonmaak", "fabriek schoonmaak", "productieomgeving schoonmaak", "technische reiniging", "schoonmaak productiehal"],
+  alternates: {
+    canonical: "/diensten/industriele-schoonmaak",
+  },
 };
 
 export default function IndustrialCleaningPage() {
