@@ -12,6 +12,7 @@ type SubmitState =
   | { status: "error"; message: string };
 
 const languageStorageKey = "netjes-en-klaar-language";
+const languageChangeEvent = "netjes-en-klaar-language-change";
 
 const content = {
   nl: {
@@ -104,10 +105,30 @@ export function JobApplicationForm() {
   const copy = content[language];
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(languageStorageKey);
-    if (stored === "nl" || stored === "ar") {
-      setLanguage(stored);
-    }
+    const syncLanguage = (nextLanguage: string | null) => {
+      if (nextLanguage === "nl" || nextLanguage === "ar") {
+        setLanguage(nextLanguage);
+      }
+    };
+
+    syncLanguage(window.localStorage.getItem(languageStorageKey));
+
+    const handleLanguageChange = (event: Event) => {
+      const customEvent = event as CustomEvent<Language>;
+      syncLanguage(customEvent.detail);
+    };
+
+    const handleStorage = () => {
+      syncLanguage(window.localStorage.getItem(languageStorageKey));
+    };
+
+    window.addEventListener(languageChangeEvent, handleLanguageChange as EventListener);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener(languageChangeEvent, handleLanguageChange as EventListener);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {

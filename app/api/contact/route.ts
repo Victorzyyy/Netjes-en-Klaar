@@ -17,6 +17,45 @@ function values(formData: FormData, key: string) {
 
 export async function POST(request: Request) {
   const formData = await request.formData();
+  const lang = value(formData, "lang") === "ar" ? "ar" : "nl";
+  const copy =
+    lang === "ar"
+      ? {
+          required: "يرجى إدخال الاسم ووسيلة التواصل والرسالة على الأقل.",
+          notConfigured: "النموذج غير مربوط بالإرسال بعد. يمكنك الاتصال بنا أو مراسلتنا مباشرة وسنساعدك فوراً.",
+          sendFailed: "تعذر الإرسال حالياً. يمكنك الاتصال بنا أو مراسلتنا مباشرة.",
+          success: "تم إرسال رسالتك. سنتواصل معك في أقرب وقت.",
+          subjectPrefix: "طلب جديد عبر الموقع",
+          empty: "غير مُدخل",
+          labels: {
+            name: "الاسم",
+            contact: "التواصل",
+            services: "الخدمات",
+            requestType: "نوع الطلب",
+            location: "الموقع",
+            timing: "التوقيت",
+            contactPreference: "طريقة التواصل المفضلة",
+            message: "الرسالة",
+          },
+        }
+      : {
+          required: "Vul in ieder geval naam, contact en bericht in.",
+          notConfigured: "Het formulier is nog niet volledig gekoppeld voor verzending. Bel of mail ons direct, dan helpen we je meteen.",
+          sendFailed: "Versturen lukt nu even niet. Bel of mail ons gerust direct.",
+          success: "Je bericht is verstuurd. We nemen zo snel mogelijk contact op.",
+          subjectPrefix: "Nieuwe aanvraag via website",
+          empty: "Niet ingevuld",
+          labels: {
+            name: "Naam",
+            contact: "Contact",
+            services: "Diensten",
+            requestType: "Type aanvraag",
+            location: "Locatie",
+            timing: "Timing",
+            contactPreference: "Voorkeur contact",
+            message: "Bericht",
+          },
+        };
 
   const payload = {
     name: value(formData, "name"),
@@ -31,7 +70,7 @@ export async function POST(request: Request) {
 
   if (!payload.name || !payload.contact || !payload.message) {
     return NextResponse.json(
-      { ok: false, message: "Vul in ieder geval naam, contact en bericht in." },
+      { ok: false, message: copy.required },
       { status: 400 },
     );
   }
@@ -45,13 +84,13 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        message: "Het formulier is nog niet volledig gekoppeld voor verzending. Bel of mail ons direct, dan helpen we je meteen.",
+        message: copy.notConfigured,
       },
       { status: 503 },
     );
   }
 
-  const servicesLabel = payload.services.length ? payload.services.join(", ") : "Niet ingevuld";
+  const servicesLabel = payload.services.length ? payload.services.join(", ") : copy.empty;
 
   const emailResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -63,17 +102,17 @@ export async function POST(request: Request) {
       from: contactFromEmail,
       to: [contactToEmail],
       reply_to: payload.contact.includes("@") ? payload.contact : undefined,
-      subject: `Nieuwe aanvraag via website - ${payload.name}`,
+      subject: `${copy.subjectPrefix} - ${payload.name}`,
       text: [
-        `Naam: ${payload.name}`,
-        `Contact: ${payload.contact}`,
-        `Diensten: ${servicesLabel}`,
-        `Type aanvraag: ${payload.requestType || "Niet ingevuld"}`,
-        `Locatie: ${payload.location || "Niet ingevuld"}`,
-        `Timing: ${payload.timing || "Niet ingevuld"}`,
-        `Voorkeur contact: ${payload.contactPreference || "Niet ingevuld"}`,
+        `${copy.labels.name}: ${payload.name}`,
+        `${copy.labels.contact}: ${payload.contact}`,
+        `${copy.labels.services}: ${servicesLabel}`,
+        `${copy.labels.requestType}: ${payload.requestType || copy.empty}`,
+        `${copy.labels.location}: ${payload.location || copy.empty}`,
+        `${copy.labels.timing}: ${payload.timing || copy.empty}`,
+        `${copy.labels.contactPreference}: ${payload.contactPreference || copy.empty}`,
         "",
-        "Bericht:",
+        `${copy.labels.message}:`,
         payload.message,
       ].join("\n"),
     }),
@@ -83,13 +122,13 @@ export async function POST(request: Request) {
     const errorText = await emailResponse.text();
     console.error("Contact form delivery failed.", errorText);
     return NextResponse.json(
-      { ok: false, message: "Versturen lukt nu even niet. Bel of mail ons gerust direct." },
+      { ok: false, message: copy.sendFailed },
       { status: 502 },
     );
   }
 
   return NextResponse.json({
     ok: true,
-    message: "Je bericht is verstuurd. We nemen zo snel mogelijk contact op.",
+    message: copy.success,
   });
 }

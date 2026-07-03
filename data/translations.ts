@@ -117,7 +117,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     nav: {
       services: "Diensten",
-      process: "Planning",
+      process: "Werkwijze",
       contact: "Contact",
       careers: "Werken bij",
       callNow: "Bel direct",
@@ -273,7 +273,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     nav: {
       services: "الخدمات",
-      process: "الترتيب",
+      process: "طريقة العمل",
       contact: "التواصل",
       careers: "العمل معنا",
       callNow: "اتصل الآن",

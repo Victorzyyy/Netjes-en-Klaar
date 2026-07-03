@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+
+import { FloatingWhatsAppButton } from "@/components/floating-whatsapp-button";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +26,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nl" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        {children}
+        <FloatingWhatsAppButton />
+      </body>
     </html>
   );
 }

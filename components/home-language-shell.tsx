@@ -8,6 +8,7 @@ import { HeroSection } from "@/components/hero-section";
 import { PoppableSiteBubbles } from "@/components/poppable-site-bubbles";
 import { ProcessTimeline } from "@/components/process-timeline";
 import { ServiceSituationFlow } from "@/components/service-situation-flow";
+import { SiteHeader } from "@/components/site-header";
 import { businessInfo } from "@/data/site-content";
 import { Language, translations } from "@/data/translations";
 
@@ -36,13 +37,13 @@ export function HomeLanguageShell() {
       "@type": "CleaningService",
       name: businessInfo.name,
       description: copy.meta.schemaDescription,
-      telephone: "+31612345678",
+      telephone: "+31687258236",
       email: businessInfo.email,
       areaServed: businessInfo.serviceAreas.map((area) => ({ "@type": "Country", name: area })),
       serviceType: businessInfo.services,
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+31612345678",
+        telephone: "+31687258236",
         email: businessInfo.email,
         contactType: "customer service",
         areaServed: businessInfo.serviceAreas,
@@ -57,51 +58,7 @@ export function HomeLanguageShell() {
       <PoppableSiteBubbles />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      <header className="fresh-shell sticky top-3 z-40 pt-3">
-        <div className="fresh-card flex flex-wrap items-center justify-between gap-3 rounded-[2rem] px-4 py-3 md:flex-nowrap md:px-5">
-          <a href="#top" className="flex items-center gap-3 text-sm font-black uppercase tracking-[0.22em] text-fresh-ink">
-            <span className="grid size-9 place-items-center rounded-full bg-fresh-ink text-white shadow-glow">N</span>
-            <span className="hidden sm:inline">Netjes & Klaar</span>
-          </a>
-
-          <nav className="order-3 flex w-full items-center justify-center gap-5 text-sm font-bold text-[hsl(var(--muted))] md:order-2 md:w-auto md:gap-7">
-            <a className="transition hover:text-fresh-ink" href="#diensten">{copy.nav.services}</a>
-            <a className="transition hover:text-fresh-ink" href="#planning">{copy.nav.process}</a>
-            <a className="transition hover:text-fresh-ink" href="#contact">{copy.nav.contact}</a>
-            <a className="transition hover:text-fresh-ink" href="/werken-bij">{copy.nav.careers}</a>
-          </nav>
-
-          <div className="order-2 flex items-center gap-2 md:order-3">
-            <div className="flex items-center gap-1 rounded-full border border-fresh-blue/18 bg-white/78 p-1 shadow-[0_16px_40px_-28px_rgba(21,86,112,0.24)]">
-              <span className="sr-only">{copy.nav.switchLabel}</span>
-              <button
-                type="button"
-                onClick={() => setLanguage("nl")}
-                className={
-                  "rounded-full px-3 py-2 text-xs font-bold transition sm:px-4 " +
-                  (language === "nl" ? "bg-fresh-ink text-white shadow-fresh" : "text-fresh-ink/70 hover:bg-white hover:text-fresh-ink")
-                }
-              >
-                NL
-              </button>
-              <button
-                type="button"
-                onClick={() => setLanguage("ar")}
-                className={
-                  "rounded-full px-3 py-2 text-xs font-bold transition sm:px-4 " +
-                  (language === "ar" ? "bg-fresh-ink text-white shadow-fresh" : "text-fresh-ink/70 hover:bg-white hover:text-fresh-ink")
-                }
-              >
-                العربية
-              </button>
-            </div>
-
-            <a href={businessInfo.phoneHref} className="hidden rounded-full bg-fresh-ink px-4 py-2 text-sm font-black text-white transition hover:bg-fresh-blue sm:inline-flex">
-              {copy.nav.callNow}
-            </a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader language={language} onLanguageChange={setLanguage} isHome />
 
       <HeroSection copy={copy.hero} />
 
@@ -121,7 +78,7 @@ export function HomeLanguageShell() {
         <ServiceSituationFlow copy={copy.servicesSection} />
       </section>
 
-      <section className="fresh-shell relative z-10 py-24 md:py-28">
+      <section id="werkwijze" className="fresh-shell relative z-10 py-24 md:py-28">
         <div className="mx-auto max-w-3xl space-y-5 text-center">
           <p className="section-kicker">{copy.processSection.kicker}</p>
           <h2 className="text-balance text-4xl font-extrabold tracking-[-0.045em] text-fresh-ink md:text-5xl">{copy.processSection.title}</h2>
@@ -154,7 +111,7 @@ export function HomeLanguageShell() {
         </div>
       </section>
 
-      <ContactSection copy={copy.contactSection} />
+      <ContactSection copy={copy.contactSection} language={language} />
     </main>
   );
 }

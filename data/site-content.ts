@@ -1,7 +1,8 @@
 export const businessInfo = {
   name: "Netjes & Klaar",
-  phoneDisplay: "06 12345678",
-  phoneHref: "tel:0612345678",
+  phoneDisplay: "06 87258236",
+  phoneHref: "tel:+31687258236",
+  whatsappHref: "https://wa.me/31687258236",
   email: "hallo@netjesenklaar.nl",
   serviceAreaText: "Landelijk inzetbaar",
   serviceAreaFocus: "Bedrijven, evenementen en vakantieparken in heel Nederland",

@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 
 import { businessInfo } from "@/data/site-content";
-import type { TranslationDictionary } from "@/data/translations";
+import type { Language, TranslationDictionary } from "@/data/translations";
 
 type SubmitState =
   | { status: "idle" }
@@ -12,7 +12,7 @@ type SubmitState =
   | { status: "success"; message: string }
   | { status: "error"; message: string };
 
-export function ContactSection({ copy }: { copy: TranslationDictionary["contactSection"] }) {
+export function ContactSection({ copy, language }: { copy: TranslationDictionary["contactSection"]; language: Language }) {
   const [submitState, setSubmitState] = useState<SubmitState>({ status: "idle" });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -63,20 +63,6 @@ export function ContactSection({ copy }: { copy: TranslationDictionary["contactS
             <p className="mt-2 leading-7 text-[hsl(var(--muted))]">{copy.regionBody}</p>
           </div>
 
-          <div className="grid gap-3">
-            {copy.trustPoints.map((point, index) => (
-              <div key={point.title} className="rounded-[1.55rem] border border-fresh-blue/12 bg-white/34 px-4 py-4 shadow-[0_18px_45px_-40px_rgba(21,86,112,0.14)] backdrop-blur-[5px]">
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 text-sm font-black tracking-[0.18em] text-fresh-blue/72">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="space-y-1">
-                    <p className="font-semibold text-fresh-ink">{point.title}</p>
-                    <p className="leading-7 text-[hsl(var(--muted))]">{point.text}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
           <div className="grid gap-3 pt-2 text-fresh-ink sm:grid-cols-2 lg:grid-cols-1">
             <a href={businessInfo.phoneHref} className="group flex items-center gap-3 rounded-2xl border border-fresh-blue/20 bg-white/28 px-4 py-3 transition hover:-translate-y-0.5 hover:bg-white/45 hover:shadow-[0_18px_45px_rgba(21,86,112,0.12)]">
               <span className="grid size-10 place-items-center rounded-full bg-fresh-ink text-white transition group-hover:bg-fresh-blue"><Phone size={18} /></span>
@@ -89,7 +75,8 @@ export function ContactSection({ copy }: { copy: TranslationDictionary["contactS
           </div>
         </div>
 
-        <form id="planning" onSubmit={handleSubmit} className="fresh-card grid gap-6 rounded-[2rem] p-5 md:p-7">
+        <form onSubmit={handleSubmit} className="fresh-card grid gap-6 rounded-[2rem] p-5 md:p-7">
+          <input type="hidden" name="lang" value={language} />
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="grid gap-2 text-sm font-semibold text-fresh-ink">
               {copy.form.name}
