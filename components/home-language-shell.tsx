@@ -64,10 +64,10 @@ export function HomeLanguageShell() {
 
       <CleanWaveDivider />
 
-      <section id="diensten" className="fresh-shell relative z-10 grid min-h-screen content-center gap-8 py-16">
-        <div className="relative grid justify-items-center gap-5 text-center md:min-h-[14rem]">
+      <section id="diensten" className="fresh-shell relative z-10 grid gap-8 py-20 md:py-28">
+        <div className="relative grid justify-items-center gap-5 text-center">
           <div className="space-y-5">
-            <h2 className="mx-auto mt-4 max-w-5xl text-balance text-4xl font-extrabold leading-[0.98] tracking-[-0.055em] text-fresh-ink md:text-6xl lg:text-7xl">
+            <h2 className="mx-auto max-w-5xl text-balance text-4xl font-extrabold leading-[1.02] tracking-[-0.035em] text-fresh-ink md:text-5xl lg:text-6xl">
               {copy.servicesSection.title}
             </h2>
             <p className="mx-auto max-w-2xl text-lg leading-8 text-[hsl(var(--muted))]">

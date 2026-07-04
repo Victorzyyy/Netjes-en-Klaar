@@ -3,18 +3,45 @@ import Script from "next/script";
 
 import { CookieConsent } from "@/components/cookie-consent";
 import { FloatingWhatsAppButton } from "@/components/floating-whatsapp-button";
+import { businessInfo } from "@/data/site-content";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Netjes & Klaar | Commerciele schoonmaak voor kantoren, vakantieparken, industrie en events",
-  description: "Netjes & Klaar verzorgt commerciele schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen en productieomgevingen in Nederland. Heldere planning, duidelijke takenlijsten en vaste aanspreekpunten.",
-  keywords: ["schoonmaakbedrijf", "commerciele schoonmaak", "kantoorschoonmaak", "vakantiepark schoonmaak", "evenementenreiniging", "bouwschoonmaak", "industriele schoonmaak", "fabriek schoonmaak", "facilitaire schoonmaak", "zakelijke schoonmaak nederland"],
+  metadataBase: new URL(businessInfo.siteUrl),
+  title: "Netjes & Klaar | Commerciele schoonmaak, dieptereiniging en industriele reiniging",
+  description:
+    "Netjes & Klaar verzorgt commerciele schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen, dieptereiniging en productieomgevingen in Nederland. Heldere planning, duidelijke takenlijsten en vaste aanspreekpunten.",
+  keywords: [
+    "schoonmaakbedrijf",
+    "commerciele schoonmaak",
+    "kantoorschoonmaak",
+    "vakantiepark schoonmaak",
+    "evenementenreiniging",
+    "bouwschoonmaak",
+    "industriele schoonmaak",
+    "fabriek schoonmaak",
+    "dieptereiniging",
+    "facilitaire schoonmaak",
+    "zakelijke schoonmaak nederland",
+  ],
+  applicationName: "Netjes & Klaar",
+  category: "business",
   openGraph: {
     title: "Netjes & Klaar | Commerciele schoonmaak voor bedrijven en locaties",
-    description: "Schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen en productieomgevingen in Nederland met duidelijke planning en terugkoppeling.",
+    description:
+      "Schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen, dieptereiniging en productieomgevingen in Nederland met duidelijke planning en terugkoppeling.",
+    url: businessInfo.siteUrl,
+    siteName: businessInfo.name,
     type: "website",
     locale: "nl_NL",
+    alternateLocale: ["ar"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Netjes & Klaar | Commerciele schoonmaak voor bedrijven en locaties",
+    description:
+      "Schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen, dieptereiniging en productieomgevingen in Nederland.",
   },
   robots: {
     index: true,

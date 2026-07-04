@@ -9,12 +9,63 @@ import type { TranslationDictionary } from "@/data/translations";
 export function ServiceSituationFlow({ copy }: { copy: TranslationDictionary["servicesSection"] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = copy.items[activeIndex];
+  const detailPages: Record<string, { href: string; label: string }> = {
+    Kantoorschoonmaak: {
+      href: "/diensten/kantoorschoonmaak",
+      label: "Meer over kantoorschoonmaak",
+    },
+    "Vakantieparken": {
+      href: "/diensten/vakantiepark-schoonmaak",
+      label: "Meer over vakantiepark schoonmaak",
+    },
+    Evenementenreiniging: {
+      href: "/diensten/evenementenreiniging",
+      label: "Meer over evenementenreiniging",
+    },
+    Bouwschoonmaak: {
+      href: "/diensten/bouwschoonmaak",
+      label: "Meer over bouwschoonmaak",
+    },
+    "Industriele schoonmaak": {
+      href: "/diensten/industriele-schoonmaak",
+      label: "Meer over industriele schoonmaak",
+    },
+    Dieptereiniging: {
+      href: "/diensten/dieptereiniging",
+      label: "Meer over dieptereiniging",
+    },
+    "تنظيف المكاتب": {
+      href: "/diensten/kantoorschoonmaak",
+      label: "المزيد عن تنظيف المكاتب",
+    },
+    "تنظيف منتجعات العطلات": {
+      href: "/diensten/vakantiepark-schoonmaak",
+      label: "المزيد عن تنظيف منتجعات العطلات",
+    },
+    "تنظيف الفعاليات": {
+      href: "/diensten/evenementenreiniging",
+      label: "المزيد عن تنظيف الفعاليات",
+    },
+    "تنظيف ما بعد البناء": {
+      href: "/diensten/bouwschoonmaak",
+      label: "المزيد عن تنظيف ما بعد البناء",
+    },
+    "تنظيف صناعي": {
+      href: "/diensten/industriele-schoonmaak",
+      label: "المزيد عن التنظيف الصناعي",
+    },
+    "تنظيف عميق": {
+      href: "/diensten/dieptereiniging",
+      label: "المزيد عن التنظيف العميق",
+    },
+  };
+  const detailPage = detailPages[active.service];
 
   return (
     <div className="grid gap-5">
       <div className="space-y-3 rounded-[2.1rem] bg-white/62 p-3 shadow-[0_22px_60px_-48px_rgba(21,86,112,0.18)] backdrop-blur-[8px] md:p-4">
         <p className="directional-text text-sm font-semibold uppercase tracking-[0.14em] text-fresh-ink/72">{copy.pickerTitle}</p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
           {copy.items.map((situation, index) => {
             const selected = index === activeIndex;
 
@@ -59,13 +110,13 @@ export function ServiceSituationFlow({ copy }: { copy: TranslationDictionary["se
           </a>
         </div>
 
-        {active.service === "Industriele schoonmaak" || active.service === "تنظيف صناعي" ? (
+        {detailPage ? (
           <div className="mt-4">
             <a
-              href="/diensten/industriele-schoonmaak"
+              href={detailPage.href}
               className="inline-flex items-center justify-center rounded-full border border-fresh-blue/20 bg-white px-5 py-3 text-sm font-semibold text-fresh-ink shadow-fresh transition hover:-translate-y-0.5 hover:border-fresh-ink/20"
             >
-              {active.service === "Industriele schoonmaak" ? "Meer over industriele schoonmaak" : "المزيد عن التنظيف الصناعي"}
+              {detailPage.label}
             </a>
           </div>
         ) : null}

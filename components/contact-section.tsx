@@ -66,11 +66,11 @@ export function ContactSection({ copy, language }: { copy: TranslationDictionary
           <div className="grid gap-3 pt-2 text-fresh-ink sm:grid-cols-2 lg:grid-cols-1">
             <a href={businessInfo.phoneHref} className="group flex items-center gap-3 rounded-2xl border border-fresh-blue/20 bg-white/28 px-4 py-3 transition hover:-translate-y-0.5 hover:bg-white/45 hover:shadow-[0_18px_45px_rgba(21,86,112,0.12)]">
               <span className="grid size-10 place-items-center rounded-full bg-fresh-ink text-white transition group-hover:bg-fresh-blue"><Phone size={18} /></span>
-              <span><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-fresh-ink/55">{copy.callLabel}</span><span className="font-semibold">{businessInfo.phoneDisplay}</span></span>
+              <span><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-fresh-ink/55">{copy.callLabel}</span><span className="latin-inline font-semibold">{businessInfo.phoneDisplay}</span></span>
             </a>
             <a href={`mailto:${businessInfo.email}`} className="group flex items-center gap-3 rounded-2xl border border-fresh-blue/20 bg-white/28 px-4 py-3 transition hover:-translate-y-0.5 hover:bg-white/45 hover:shadow-[0_18px_45px_rgba(21,86,112,0.12)]">
               <span className="grid size-10 place-items-center rounded-full bg-fresh-cloud text-fresh-blue transition group-hover:bg-fresh-mint group-hover:text-fresh-ink"><Mail size={18} /></span>
-              <span><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-fresh-ink/55">{copy.mailLabel}</span><span className="font-semibold">{businessInfo.email}</span></span>
+              <span><span className="block text-xs font-semibold uppercase tracking-[0.16em] text-fresh-ink/55">{copy.mailLabel}</span><span className="latin-inline font-semibold">{businessInfo.email}</span></span>
             </a>
           </div>
         </div>

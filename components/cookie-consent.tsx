@@ -25,28 +25,28 @@ type ConsentState = {
 
 const content = {
   nl: {
-    title: "Cookies en analytics",
-    body: "We gebruiken functionele cookies om de website goed te laten werken. Met analytics kunnen we meten wat beter kan, maar dat zetten we alleen aan als je akkoord geeft.",
+    title: "Cookies",
+    body: "We gebruiken noodzakelijke cookies voor de website. Alleen met jouw toestemming zetten we analytics aan.",
     accept: "Alles accepteren",
     reject: "Alleen noodzakelijk",
-    manage: "Instellingen",
+    manage: "Meer opties",
     save: "Opslaan",
-    reopen: "Cookie-instellingen",
+    reopen: "Cookies",
     policy: "Privacy- en cookiebeleid",
     analyticsLabel: "Analytics toestaan",
-    analyticsHelp: "Hiermee kunnen we anoniemer meten hoe de website gebruikt wordt, bijvoorbeeld via Google Analytics.",
+    analyticsHelp: "Hiermee meten we op hoofdlijnen hoe de website gebruikt wordt.",
   },
   ar: {
-    title: "الكوكيز والتحليلات",
-    body: "نستخدم كوكيز أساسية ليعمل الموقع بشكل جيد. أما التحليلات فنفعلها فقط إذا وافقت، حتى نعرف ما الذي يمكن تحسينه.",
+    title: "الكوكيز",
+    body: "نستخدم كوكيز أساسية ليعمل الموقع بشكل جيد. ولا نفعّل التحليلات إلا بعد موافقتك.",
     accept: "قبول الكل",
     reject: "الضروري فقط",
-    manage: "الإعدادات",
+    manage: "خيارات أكثر",
     save: "حفظ",
-    reopen: "إعدادات الكوكيز",
+    reopen: "الكوكيز",
     policy: "سياسة الخصوصية والكوكيز",
     analyticsLabel: "السماح بالتحليلات",
-    analyticsHelp: "يساعدنا هذا على قياس استخدام الموقع بشكل أكثر خصوصية، مثلاً عبر Google Analytics.",
+    analyticsHelp: "يساعدنا هذا على فهم استخدام الموقع بشكل عام.",
   },
 } as const;
 
@@ -101,7 +101,7 @@ export function CookieConsent() {
 
     if (!stored) {
       setShowBanner(true);
-      setShowPanel(true);
+      setShowPanel(false);
       return;
     }
 
@@ -111,7 +111,7 @@ export function CookieConsent() {
       updateGoogleConsent(parsed.analytics);
     } catch {
       setShowBanner(true);
-      setShowPanel(true);
+      setShowPanel(false);
     }
   }, []);
 
@@ -144,20 +144,20 @@ export function CookieConsent() {
   return (
     <>
       {showBanner ? (
-        <div className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-3xl rounded-[1.75rem] border border-white/75 bg-white/92 p-4 shadow-[0_28px_90px_-40px_rgba(21,86,112,0.35)] backdrop-blur-md sm:bottom-5 sm:p-5">
+        <div className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-2xl rounded-[1.6rem] border border-fresh-blue/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,251,252,0.96))] p-4 shadow-[0_28px_80px_-42px_rgba(21,86,112,0.24)] ring-1 ring-black/4 backdrop-blur-[6px] sm:bottom-5 sm:p-5">
           <div className="flex flex-col gap-4">
             <div className="flex items-start gap-3">
-              <span className="grid size-11 shrink-0 place-items-center rounded-full bg-fresh-ink text-white">
-                <Cookie size={20} />
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-fresh-ink text-white">
+                <Cookie size={18} />
               </span>
               <div>
-                <p className="text-lg font-bold tracking-[-0.03em] text-fresh-ink">{labels.title}</p>
-                <p className="mt-2 leading-7 text-[hsl(var(--muted))]">{labels.body}</p>
+                <p className="text-base font-bold tracking-[-0.03em] text-fresh-ink">{labels.title}</p>
+                <p className="mt-1 text-sm leading-6 text-[hsl(var(--muted))]">{labels.body}</p>
               </div>
             </div>
 
             {showPanel ? (
-              <div className="rounded-[1.35rem] border border-fresh-blue/14 bg-fresh-cloud/40 p-4">
+              <div className="rounded-[1.2rem] border border-fresh-blue/12 bg-fresh-cloud/70 p-4">
                 <label className="flex items-start gap-3">
                   <input
                     type="checkbox"
@@ -180,7 +180,7 @@ export function CookieConsent() {
               <button onClick={rejectOptional} type="button" className="rounded-full border border-fresh-blue/18 bg-white px-5 py-3 text-sm font-semibold text-fresh-ink transition hover:border-fresh-ink/20">
                 {labels.reject}
               </button>
-              <button onClick={() => setShowPanel((current) => !current)} type="button" className="rounded-full border border-transparent px-5 py-3 text-sm font-semibold text-fresh-ink/72 transition hover:bg-fresh-cloud/55 hover:text-fresh-ink">
+              <button onClick={() => setShowPanel((current) => !current)} type="button" className="rounded-full border border-transparent px-4 py-3 text-sm font-semibold text-fresh-ink/72 transition hover:bg-fresh-cloud/55 hover:text-fresh-ink">
                 {showPanel ? labels.save : labels.manage}
               </button>
               {showPanel ? (
@@ -190,26 +190,14 @@ export function CookieConsent() {
               ) : null}
             </div>
 
-            <div>
+            <div className="pt-1">
               <Link href="/privacy" className="text-sm font-semibold text-fresh-blue transition hover:text-fresh-ink">
                 {labels.policy}
               </Link>
             </div>
           </div>
         </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            setShowBanner(true);
-            setShowPanel(true);
-          }}
-          className="fixed bottom-4 left-4 z-[60] inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/90 px-4 py-2.5 text-sm font-semibold text-fresh-ink shadow-[0_18px_40px_-28px_rgba(21,86,112,0.28)] backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white"
-        >
-          <Cookie size={16} />
-          {labels.reopen}
-        </button>
-      )}
+      ) : null}
     </>
   );
 }

@@ -1,5 +1,6 @@
 export const businessInfo = {
   name: "Netjes & Klaar",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.netjesenklaar.nl",
   phoneDisplay: "06 87258236",
   phoneHref: "tel:+31687258236",
   whatsappHref: "https://wa.me/31687258236",

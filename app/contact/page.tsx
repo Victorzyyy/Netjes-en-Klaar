@@ -12,11 +12,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default function ContactPage({
+  searchParams,
+}: {
+  searchParams?: { route?: string };
+}) {
+  const initialAudience = searchParams?.route === "private" ? "private" : "business";
+
   return (
     <main className="relative min-h-screen overflow-x-hidden pb-24">
       <SubpageHeader />
-      <ContactPageContent />
+      <ContactPageContent initialAudience={initialAudience} />
     </main>
   );
 }

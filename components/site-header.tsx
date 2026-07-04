@@ -18,6 +18,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const copy = translations[language];
+  const isRtl = copy.dir === "rtl";
   const navItems = [
     { label: copy.nav.services, href: isHome ? "#diensten" : "/#diensten" },
     { label: copy.nav.process, href: isHome ? "#werkwijze" : "/#werkwijze" },
@@ -36,7 +37,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
 
   return (
     <header className="fresh-shell sticky top-3 z-40 pt-3">
-      <div className="fresh-card flex items-center justify-between gap-3 rounded-[1.75rem] px-4 py-3 sm:px-5 lg:gap-5">
+      <div className="fresh-card flex items-center justify-between gap-3 rounded-[1.75rem] px-4 py-3 sm:px-5 md:gap-4 lg:gap-5">
         <div className="flex min-w-0 items-center justify-between gap-3">
           <a href={isHome ? "#top" : "/"} className="flex min-w-0 items-center gap-3 text-sm font-black uppercase tracking-[0.18em] text-fresh-ink">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-fresh-ink text-white shadow-glow">N</span>
@@ -44,11 +45,11 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
           </a>
         </div>
 
-        <nav aria-label="Hoofdnavigatie" className="hidden min-w-0 items-center gap-1 text-sm font-bold text-[hsl(var(--muted))] lg:flex">
+        <nav aria-label={copy.nav.mainNav} className="hidden min-w-0 items-center gap-1 text-sm font-bold text-[hsl(var(--muted))] md:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
-              className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full px-4 py-2.5 transition hover:bg-white/62 hover:text-fresh-ink"
+              className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 py-2.5 transition hover:bg-white/62 hover:text-fresh-ink lg:px-4"
               href={item.href}
             >
               {item.label}
@@ -56,21 +57,21 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
           ))}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-2 lg:flex">
+        <div className="hidden shrink-0 items-center gap-2 md:flex">
           <LanguageSwitch language={language} onChange={changeLanguage} label={copy.nav.switchLabel} />
           <a href={businessInfo.phoneHref} className="rounded-full bg-fresh-ink px-4 py-2.5 text-sm font-black text-white transition hover:bg-fresh-blue">
             {copy.nav.callNow}
           </a>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2 lg:hidden">
+        <div className="flex shrink-0 items-center gap-2 md:hidden">
           <LanguageSwitch language={language} onChange={changeLanguage} label={copy.nav.switchLabel} />
           <button
             type="button"
             onClick={() => setIsMenuOpen((current) => !current)}
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? "Menu sluiten" : "Menu openen"}
+            aria-label={isMenuOpen ? copy.nav.closeMenu : copy.nav.openMenu}
             className="grid size-10 place-items-center rounded-full bg-fresh-ink text-white shadow-fresh transition hover:bg-fresh-blue"
           >
             {isMenuOpen ? <X size={19} /> : <Menu size={19} />}
@@ -80,7 +81,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
 
       <div
         className={
-          "fixed inset-0 z-40 bg-fresh-ink/14 transition lg:hidden " +
+          "fixed inset-0 z-40 bg-fresh-ink/14 transition md:hidden " +
           (isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0")
         }
         onClick={() => setIsMenuOpen(false)}
@@ -89,23 +90,24 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
       <aside
         id="mobile-menu"
         className={
-          "fixed right-3 top-24 z-50 w-[min(22rem,calc(100vw-1.5rem))] rounded-[1.6rem] border border-white/70 bg-white/90 p-3 shadow-[0_28px_90px_-45px_rgba(21,86,112,0.45)] backdrop-blur-md transition lg:hidden " +
-          (isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0 pointer-events-none")
+          "fixed top-24 z-50 w-[min(22rem,calc(100vw-1.5rem))] rounded-[1.6rem] border border-white/70 bg-white/90 p-3 shadow-[0_28px_90px_-45px_rgba(21,86,112,0.45)] backdrop-blur-md transition md:hidden " +
+          (isRtl ? "left-3 " : "right-3 ") +
+          (isMenuOpen ? "translate-x-0 opacity-100" : (isRtl ? "-translate-x-4 " : "translate-x-4 ") + "opacity-0 pointer-events-none")
         }
       >
         <div className="mb-2 flex items-center justify-between px-1">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-fresh-ink/55">Menu</p>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-fresh-ink/55">{copy.nav.menu}</p>
           <button
             type="button"
             onClick={() => setIsMenuOpen(false)}
-            aria-label="Menu sluiten"
+            aria-label={copy.nav.closeMenu}
             className="grid size-9 place-items-center rounded-full bg-fresh-cloud text-fresh-ink transition hover:bg-fresh-ink hover:text-white"
           >
             <X size={18} />
           </button>
         </div>
 
-        <nav aria-label="Mobiele navigatie" className="grid gap-1">
+        <nav aria-label={copy.nav.mobileNav} className="grid gap-1">
           {navItems.map((item) => (
             <a
               key={item.href}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -23,9 +23,10 @@ const heroCornerBubbles = [
 export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
   const [poppedHeroBubbles, setPoppedHeroBubbles] = useState<Array<number | string>>([]);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
-  const reduceHeroMotion = isCoarsePointer;
-  const visibleHeroBubbles = reduceHeroMotion ? bubbles.filter((bubble) => [2, 4, 6].includes(bubble.id)) : bubbles;
-  const visibleCornerBubbles = reduceHeroMotion ? heroCornerBubbles.slice(0, 1) : heroCornerBubbles;
+  const prefersReducedMotion = useReducedMotion();
+  const reduceHeroMotion = isCoarsePointer || prefersReducedMotion;
+  const visibleHeroBubbles = reduceHeroMotion ? bubbles.filter((bubble) => [2, 5].includes(bubble.id)) : bubbles;
+  const visibleCornerBubbles = reduceHeroMotion ? [] : heroCornerBubbles;
 
   useEffect(() => {
     const media = window.matchMedia("(pointer: coarse)");
@@ -54,7 +55,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
       <div className="absolute right-[-10rem] top-[-7rem] -z-10 size-[34rem] rounded-full bg-fresh-aqua/16 blur-3xl" />
       <div className="absolute bottom-[-12rem] left-[-8rem] -z-10 size-[32rem] rounded-full bg-fresh-mint/42 blur-3xl" />
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-90">
+      <div className={"pointer-events-none absolute inset-0 overflow-hidden " + (reduceHeroMotion ? "opacity-78" : "opacity-90")}>
         {visibleCornerBubbles.map((bubble) => {
           const isPopped = poppedHeroBubbles.includes(bubble.id);
 
@@ -65,7 +66,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
               tabIndex={-1}
               aria-label={copy.popBubbleLabel}
               onClick={() => popHeroBubble(bubble.id)}
-              className="pointer-events-auto absolute rounded-full border border-white/90 bg-white/58 shadow-[inset_0_2px_24px_rgba(255,255,255,0.94),0_28px_94px_rgba(64,190,210,0.28)] backdrop-blur-0 md:backdrop-blur-[2px]"
+              className="pointer-events-auto absolute rounded-full border border-white/88 bg-white/54 shadow-[inset_0_2px_18px_rgba(255,255,255,0.9),0_22px_76px_rgba(64,190,210,0.22)] backdrop-blur-0 md:backdrop-blur-[2px]"
               style={{ right: bubble.right, top: bubble.top, width: bubble.size, height: bubble.size }}
               animate={
                 isPopped
@@ -87,7 +88,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
         })}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-95">
+      <div className={"pointer-events-none absolute inset-0 overflow-hidden " + (reduceHeroMotion ? "opacity-82" : "opacity-95")}>
         {visibleHeroBubbles.map((bubble) => {
           const isPopped = poppedHeroBubbles.includes(bubble.id);
 
@@ -98,7 +99,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
               tabIndex={-1}
               aria-label={copy.popBubbleLabel}
               onClick={() => popHeroBubble(bubble.id)}
-              className="pointer-events-auto absolute rounded-full border border-white/86 bg-white/68 shadow-[inset_0_1px_14px_rgba(255,255,255,0.82),0_20px_62px_rgba(64,190,210,0.22)] backdrop-blur-0 md:backdrop-blur-sm"
+              className="pointer-events-auto absolute rounded-full border border-white/84 bg-white/62 shadow-[inset_0_1px_12px_rgba(255,255,255,0.8),0_18px_54px_rgba(64,190,210,0.2)] backdrop-blur-0 md:backdrop-blur-sm"
               style={{ left: bubble.left + "%", top: bubble.top + "%", width: bubble.size, height: bubble.size }}
               animate={
                 isPopped
@@ -125,7 +126,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 mx-auto max-w-3xl space-y-7 px-1 sm:px-0"
+          className="relative z-10 mx-auto max-w-4xl space-y-7 px-1 sm:px-0"
         >
           <div aria-hidden="true" className="pointer-events-none absolute -inset-x-16 -inset-y-20 -z-10 block sm:-inset-x-40 sm:-inset-y-32 md:-inset-x-60 md:-inset-y-40 lg:-inset-x-76 lg:-inset-y-48">
             <svg viewBox="0 0 1320 860" className="h-full w-full overflow-visible opacity-85">
@@ -159,23 +160,23 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
                 d="M150 444 C122 164 392 50 710 82 C1054 118 1260 300 1142 560 C1044 776 708 822 390 730 C142 658 54 518 150 444 Z"
                 fill="none"
                 stroke="url(#heroCoolingLine)"
-                strokeWidth={reduceHeroMotion ? 5 : 7}
+                strokeWidth={reduceHeroMotion ? 4 : 7}
                 strokeLinecap="round"
                 strokeDasharray="340 1080"
                 filter={reduceHeroMotion ? undefined : "url(#heroCoolingGlow)"}
                 animate={{ strokeDashoffset: [0, reduceHeroMotion ? -980 : -1340] }}
-                transition={{ duration: reduceHeroMotion ? 14 : 10.5, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: reduceHeroMotion ? 18 : 10.5, repeat: Infinity, ease: "linear" }}
               />
               <motion.path
                 d="M150 444 C122 164 392 50 710 82 C1054 118 1260 300 1142 560 C1044 776 708 822 390 730 C142 658 54 518 150 444 Z"
                 fill="none"
                 stroke="#ffffff"
                 strokeOpacity="0.5"
-                strokeWidth={reduceHeroMotion ? 1.8 : 2.6}
+                strokeWidth={reduceHeroMotion ? 1.5 : 2.6}
                 strokeLinecap="round"
                 strokeDasharray="150 1270"
                 animate={{ strokeDashoffset: [0, reduceHeroMotion ? -1040 : -1420] }}
-                transition={{ duration: reduceHeroMotion ? 17.5 : 14, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: reduceHeroMotion ? 20 : 14, repeat: Infinity, ease: "linear" }}
               />
               {reduceHeroMotion ? null : (
                 <motion.circle
@@ -191,8 +192,8 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
           </div>
 
           <div className="space-y-6">
-            <h1 className="text-balance text-5xl font-extrabold leading-[0.95] tracking-[-0.055em] text-fresh-ink sm:text-6xl lg:text-7xl xl:text-8xl">{copy.title}</h1>
-            <p className="mx-auto max-w-2xl text-xl font-semibold leading-8 tracking-[-0.02em] text-fresh-ink md:text-3xl md:leading-[1.15]">{copy.subtitle}</p>
+            <h1 className="text-balance text-5xl font-extrabold leading-[0.98] tracking-[-0.035em] text-fresh-ink sm:text-6xl lg:text-7xl">{copy.title}</h1>
+            <p className="mx-auto max-w-3xl text-xl font-semibold leading-8 tracking-[-0.01em] text-fresh-ink md:text-2xl md:leading-[1.25]">{copy.subtitle}</p>
             <p className="mx-auto max-w-xl text-base leading-8 text-[hsl(var(--muted))] md:text-lg">{copy.body}</p>
           </div>
 

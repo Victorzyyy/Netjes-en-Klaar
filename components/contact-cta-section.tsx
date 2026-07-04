@@ -40,7 +40,7 @@ export function ContactCtaSection({ copy, language }: { copy: TranslationDiction
 
       <div className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-2">
         <Link
-          href="/contact"
+          href="/contact?route=business"
           className="premium-panel group rounded-[2rem] p-6 transition hover:-translate-y-1"
         >
           <div className="flex items-start justify-between gap-4">
@@ -65,7 +65,7 @@ export function ContactCtaSection({ copy, language }: { copy: TranslationDiction
         </Link>
 
         <Link
-          href="/contact"
+          href="/contact?route=private"
           className="premium-panel group rounded-[2rem] p-6 transition hover:-translate-y-1"
         >
           <div className="flex items-start justify-between gap-4">

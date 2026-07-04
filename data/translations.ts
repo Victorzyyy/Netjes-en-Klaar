@@ -16,6 +16,11 @@ export type TranslationDictionary = {
     process: string;
     contact: string;
     careers: string;
+    mainNav: string;
+    mobileNav: string;
+    menu: string;
+    openMenu: string;
+    closeMenu: string;
     callNow: string;
     switchLabel: string;
     dutch: string;
@@ -120,6 +125,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       process: "Werkwijze",
       contact: "Contact",
       careers: "Werken bij",
+      mainNav: "Hoofdnavigatie",
+      mobileNav: "Mobiele navigatie",
+      menu: "Menu",
+      openMenu: "Menu openen",
+      closeMenu: "Menu sluiten",
       callNow: "Bel direct",
       switchLabel: "Taal kiezen",
       dutch: "Nederlands",
@@ -127,8 +137,8 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     hero: {
       title: "Netjes & Klaar",
-      subtitle: "Professionele schoonmaak, dieptereiniging en vaste service voor locaties die strak moeten blijven.",
-      body: "Heldere planning, vaste afspraken en teams die weten wat er per locatie moet gebeuren.",
+      subtitle: "Zakelijke schoonmaak en dieptereiniging voor kantoren, vakantieparken, events en productieomgevingen.",
+      body: "Landelijk inzetbaar in Nederland, met heldere planning, vaste afspraken en een duidelijke vervolgstap na je aanvraag.",
       primaryCta: "Plan een korte intake",
       secondaryCta: "Bekijk diensten",
       popBubbleLabel: "Bubbel laten knappen",
@@ -285,6 +295,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       process: "طريقة العمل",
       contact: "التواصل",
       careers: "العمل معنا",
+      mainNav: "التنقل الرئيسي",
+      mobileNav: "التنقل على الجوال",
+      menu: "القائمة",
+      openMenu: "فتح القائمة",
+      closeMenu: "إغلاق القائمة",
       callNow: "اتصل الآن",
       switchLabel: "اختر اللغة",
       dutch: "Nederlands",
@@ -292,8 +307,8 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     hero: {
       title: "Netjes & Klaar",
-      subtitle: "تنظيف احترافي وتنظيف عميق وخدمة ثابتة للمواقع التي يجب أن تبقى مرتبة فعلاً.",
-      body: "تنظيم واضح ومواعيد ثابتة وفرق تعرف بالضبط ما الذي يجب عمله في كل موقع.",
+      subtitle: "تنظيف تجاري وتنظيف عميق للمكاتب ومنتجعات العطلات والفعاليات وبيئات الإنتاج.",
+      body: "متاحون في جميع أنحاء هولندا، مع تخطيط واضح واتفاقات ثابتة وخطوة متابعة واضحة بعد إرسال طلبك.",
       primaryCta: "احجز مكالمة قصيرة",
       secondaryCta: "شاهد الخدمات",
       popBubbleLabel: "فقاعة قابلة للفرقعة",

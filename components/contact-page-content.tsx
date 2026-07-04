@@ -148,9 +148,13 @@ const content = {
   },
 } as const;
 
-export function ContactPageContent() {
+export function ContactPageContent({
+  initialAudience = "business",
+}: {
+  initialAudience?: "business" | "private";
+}) {
   const [language, setLanguage] = useState<Language>("nl");
-  const [audience, setAudience] = useState<"business" | "private">("business");
+  const [audience, setAudience] = useState<"business" | "private">(initialAudience);
   const [businessState, setBusinessState] = useState<SubmitState>({ status: "idle" });
   const [privateState, setPrivateState] = useState<SubmitState>({ status: "idle" });
 
@@ -183,7 +187,18 @@ export function ContactPageContent() {
     };
   }, []);
 
+  useEffect(() => {
+    setAudience(initialAudience);
+  }, [initialAudience]);
+
   const copy = content[language];
+
+  function chooseAudience(nextAudience: "business" | "private") {
+    setAudience(nextAudience);
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("route", nextAudience);
+    window.history.replaceState({}, "", nextUrl.toString());
+  }
 
   async function submitForm(
     event: FormEvent<HTMLFormElement>,
@@ -232,7 +247,8 @@ export function ContactPageContent() {
       <div className="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-2">
         <button
           type="button"
-          onClick={() => setAudience("business")}
+          onClick={() => chooseAudience("business")}
+          aria-pressed={audience === "business"}
           className={
             "premium-panel rounded-[2rem] p-6 text-left transition " +
             (audience === "business" ? "ring-2 ring-fresh-blue/30 shadow-[0_28px_88px_-44px_rgba(21,86,112,0.32)]" : "hover:-translate-y-1")
@@ -252,7 +268,8 @@ export function ContactPageContent() {
 
         <button
           type="button"
-          onClick={() => setAudience("private")}
+          onClick={() => chooseAudience("private")}
+          aria-pressed={audience === "private"}
           className={
             "premium-panel rounded-[2rem] p-6 text-left transition " +
             (audience === "private" ? "ring-2 ring-fresh-blue/30 shadow-[0_28px_88px_-44px_rgba(21,86,112,0.32)]" : "hover:-translate-y-1")
@@ -278,11 +295,11 @@ export function ContactPageContent() {
             <div className="mt-4 grid gap-3 text-fresh-ink">
               <a href={businessInfo.phoneHref} className="group flex items-center gap-3 rounded-2xl border border-fresh-blue/20 bg-white/28 px-4 py-3 transition hover:-translate-y-0.5 hover:bg-white/45">
                 <span className="grid size-10 place-items-center rounded-full bg-fresh-ink text-white transition group-hover:bg-fresh-blue"><Phone size={18} /></span>
-                <span className="font-semibold">{businessInfo.phoneDisplay}</span>
+                <span className="latin-inline font-semibold">{businessInfo.phoneDisplay}</span>
               </a>
               <a href={`mailto:${businessInfo.email}`} className="group flex items-center gap-3 rounded-2xl border border-fresh-blue/20 bg-white/28 px-4 py-3 transition hover:-translate-y-0.5 hover:bg-white/45">
                 <span className="grid size-10 place-items-center rounded-full bg-fresh-cloud text-fresh-blue transition group-hover:bg-fresh-mint group-hover:text-fresh-ink"><Mail size={18} /></span>
-                <span className="font-semibold">{businessInfo.email}</span>
+                <span className="latin-inline font-semibold">{businessInfo.email}</span>
               </a>
             </div>
           </div>

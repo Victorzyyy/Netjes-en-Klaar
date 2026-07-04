@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 type Bubble = {
@@ -34,6 +34,8 @@ export function PoppableSiteBubbles() {
   const [bubbles, setBubbles] = useState(initialBubbles);
   const [popped, setPopped] = useState<number[]>([]);
   const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduce = isCoarsePointer || prefersReducedMotion;
 
   useEffect(() => {
     const media = window.matchMedia("(pointer: coarse)");
@@ -57,8 +59,8 @@ export function PoppableSiteBubbles() {
   }
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[12] overflow-hidden opacity-100 max-sm:opacity-90">
-      {bubbles.slice(0, isCoarsePointer ? 2 : bubbles.length).map((bubble) => {
+    <div aria-hidden="true" className={"pointer-events-none absolute inset-0 z-[12] overflow-hidden " + (shouldReduce ? "opacity-78 max-sm:opacity-74" : "opacity-100 max-sm:opacity-90")}>
+      {bubbles.slice(0, shouldReduce ? 1 : bubbles.length).map((bubble) => {
         const isPopped = popped.includes(bubble.id);
 
         return (
@@ -67,19 +69,19 @@ export function PoppableSiteBubbles() {
             type="button"
             tabIndex={-1}
             onClick={() => popBubble(bubble.id)}
-            className="pointer-events-auto absolute rounded-full border border-white/78 bg-white/42 shadow-[inset_0_2px_24px_rgba(255,255,255,0.86),0_28px_88px_rgba(64,190,210,0.24)] backdrop-blur-0 md:backdrop-blur-[1px] transition hover:border-white/95 max-sm:scale-[0.82]"
+            className="pointer-events-auto absolute rounded-full border border-white/76 bg-white/38 shadow-[inset_0_2px_18px_rgba(255,255,255,0.82),0_22px_68px_rgba(64,190,210,0.18)] backdrop-blur-0 md:backdrop-blur-[1px] transition hover:border-white/92 max-sm:scale-[0.76]"
             style={{ left: bubble.left, top: bubble.top, width: bubble.size, height: bubble.size }}
             animate={
               isPopped
                 ? { scale: [1, 1.18, 0], opacity: [0.44, 0.82, 0], rotate: [0, 6, -8] }
-                : isCoarsePointer
-                  ? { y: [0, -4, 0], opacity: [0.5, 0.68, 0.5], scale: [1, 1.008, 1] }
+                : shouldReduce
+                  ? { y: [0, -2.5, 0], opacity: [0.42, 0.54, 0.42], scale: [1, 1.004, 1] }
                   : { y: [0, -5, 0], opacity: [0.58, 0.82, 0.58], scale: [1, 1.01, 1] }
             }
             transition={
               isPopped
                 ? { duration: 0.42, ease: "easeOut" }
-                : { duration: isCoarsePointer ? bubble.duration + 6 : bubble.duration, delay: bubble.delay, repeat: Infinity, ease: "easeInOut" }
+                : { duration: shouldReduce ? bubble.duration + 10 : bubble.duration, delay: bubble.delay, repeat: Infinity, ease: "easeInOut" }
             }
             whileTap={{ scale: 0.86 }}
           >
