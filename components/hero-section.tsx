@@ -197,7 +197,7 @@ export function HeroSection({ copy }: { copy: TranslationDictionary["hero"] }) {
           </div>
 
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
-            <a href="#contact" className="group inline-flex items-center justify-center gap-2 rounded-full bg-fresh-ink px-6 py-3.5 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue md:px-7 md:py-4 md:text-base">
+            <a href="/contact" className="group inline-flex items-center justify-center gap-2 rounded-full bg-fresh-ink px-6 py-3.5 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue md:px-7 md:py-4 md:text-base">
               {copy.primaryCta} <ArrowUpRight className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={19} />
             </a>
             <a href="#diensten" className="inline-flex items-center justify-center rounded-full border border-fresh-blue/20 bg-white px-6 py-3.5 text-sm font-semibold text-fresh-ink shadow-fresh backdrop-blur transition hover:-translate-y-0.5 hover:border-fresh-ink/20 md:px-7 md:py-4 md:text-base">

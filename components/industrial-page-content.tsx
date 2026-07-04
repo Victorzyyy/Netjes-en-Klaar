@@ -161,7 +161,7 @@ export function IndustrialPageContent() {
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="/#contact" className="inline-flex items-center justify-center rounded-full bg-fresh-ink px-6 py-3.5 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue">
+          <a href="/contact" className="inline-flex items-center justify-center rounded-full bg-fresh-ink px-6 py-3.5 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue">
             {copy.cta}
           </a>
           <Link href="/" className="inline-flex items-center justify-center rounded-full border border-fresh-blue/20 bg-white px-6 py-3.5 text-sm font-semibold text-fresh-ink shadow-fresh transition hover:-translate-y-0.5 hover:border-fresh-ink/20">

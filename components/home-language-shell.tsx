@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { CleanWaveDivider } from "@/components/clean-wave-divider";
-import { ContactSection } from "@/components/contact-section";
+import { ContactCtaSection } from "@/components/contact-cta-section";
 import { HeroSection } from "@/components/hero-section";
 import { PoppableSiteBubbles } from "@/components/poppable-site-bubbles";
 import { ProcessTimeline } from "@/components/process-timeline";
@@ -111,7 +111,7 @@ export function HomeLanguageShell() {
         </div>
       </section>
 
-      <ContactSection copy={copy.contactSection} language={language} />
+      <ContactCtaSection copy={copy.contactSection} language={language} />
     </main>
   );
 }

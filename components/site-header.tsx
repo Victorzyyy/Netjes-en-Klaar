@@ -21,7 +21,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
   const navItems = [
     { label: copy.nav.services, href: isHome ? "#diensten" : "/#diensten" },
     { label: copy.nav.process, href: isHome ? "#werkwijze" : "/#werkwijze" },
-    { label: copy.nav.contact, href: isHome ? "#contact" : "/#contact" },
+    { label: copy.nav.contact, href: "/contact" },
     { label: copy.nav.careers, href: "/werken-bij" },
   ];
 

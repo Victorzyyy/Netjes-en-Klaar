@@ -13,6 +13,7 @@ export const businessInfo = {
     "Evenementenreiniging",
     "Bouwschoonmaak",
     "Industriele schoonmaak",
+    "Dieptereiniging",
   ],
   trustPoints: [
     { title: "Vast aanspreekpunt", text: "Je weet wie de planning bewaakt en wie je belt als er iets verandert." },
@@ -42,6 +43,7 @@ export const contactServiceOptions = [
   "Evenement",
   "Bouwoplevering",
   "Industrieel / fabriek",
+  "Dieptereiniging",
 ] as const;
 
 export const requestTypeOptions = [

@@ -14,7 +14,7 @@ export function ServiceSituationFlow({ copy }: { copy: TranslationDictionary["se
     <div className="grid gap-5">
       <div className="space-y-3 rounded-[2.1rem] bg-white/62 p-3 shadow-[0_22px_60px_-48px_rgba(21,86,112,0.18)] backdrop-blur-[8px] md:p-4">
         <p className="directional-text text-sm font-semibold uppercase tracking-[0.14em] text-fresh-ink/72">{copy.pickerTitle}</p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {copy.items.map((situation, index) => {
             const selected = index === activeIndex;
 
@@ -54,7 +54,7 @@ export function ServiceSituationFlow({ copy }: { copy: TranslationDictionary["se
             <h3 className="text-4xl font-bold tracking-[-0.045em] text-fresh-ink md:text-5xl">{active.service}</h3>
             <p className="mt-4 text-lg leading-8 text-fresh-ink/78">{active.summary}</p>
           </div>
-          <a href="#contact" className="inline-flex shrink-0 rounded-full bg-fresh-ink px-5 py-3 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue">
+          <a href="/contact" className="inline-flex shrink-0 rounded-full bg-fresh-ink px-5 py-3 text-sm font-semibold text-white shadow-fresh transition hover:-translate-y-0.5 hover:bg-fresh-blue">
             {copy.requestCta}
           </a>
         </div>

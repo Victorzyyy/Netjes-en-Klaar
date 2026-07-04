@@ -110,9 +110,9 @@ export const translations: Record<Language, TranslationDictionary> = {
     meta: {
       title: "Netjes & Klaar | Commerciele schoonmaak voor kantoren, vakantieparken, industrie en events",
       description:
-        "Netjes & Klaar verzorgt commerciele schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen en productieomgevingen in Nederland. Heldere planning, duidelijke takenlijsten en vaste aanspreekpunten.",
+        "Netjes & Klaar verzorgt commerciele schoonmaak, dieptereiniging, bouwopleveringen en reiniging van productieomgevingen in Nederland. Heldere planning, duidelijke takenlijsten en vaste aanspreekpunten.",
       schemaDescription:
-        "Commerciele schoonmaak voor kantoren, vakantieparken, evenementen, bouwopleveringen en productieomgevingen met heldere planning en vaste aanspreekpunten.",
+        "Commerciele schoonmaak, dieptereiniging, bouwopleveringen en reiniging van productieomgevingen met heldere planning en vaste aanspreekpunten.",
       availableLanguages: ["Dutch", "Arabic"],
     },
     nav: {
@@ -127,7 +127,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     hero: {
       title: "Netjes & Klaar",
-      subtitle: "Professionele schoonmaak voor kantoren, vakantieparken en events.",
+      subtitle: "Professionele schoonmaak, dieptereiniging en vaste service voor locaties die strak moeten blijven.",
       body: "Heldere planning, vaste afspraken en teams die weten wat er per locatie moet gebeuren.",
       primaryCta: "Plan een korte intake",
       secondaryCta: "Bekijk diensten",
@@ -182,6 +182,14 @@ export const translations: Record<Language, TranslationDictionary> = {
           planning: "Afgestemd op ploegendienst, stilstandmomenten, veiligheidsregels en reiniging per zone.",
           checklist: ["Looproutes en werkzones", "Machines en directe omgeving", "Vloeren en stofgevoelige punten", "Afstemming op veiligheid en productie"],
         },
+        {
+          label: "Dieptereiniging",
+          service: "Dieptereiniging",
+          summary: "Voor locaties die niet alleen netjes moeten lijken, maar echt grondig fris, vetvrij en detail-schoon moeten worden aangepakt.",
+          bestFor: "Keukens, sanitair, vloeren, oplevermomenten, achterstallige schoonmaak en ruimtes die een sterke reset nodig hebben.",
+          planning: "Eenmalig of periodiek, ingepland op momenten waarop we grondig kunnen werken zonder je operatie te storen.",
+          checklist: ["Vet, kalkaanslag en opgehoopt vuil", "Randen, hoeken en moeilijk bereikbare delen", "Sanitair, keukenzones en contactpunten", "Herstel van frisheid en representatieve uitstraling"],
+        },
       ],
     },
     processSection: {
@@ -222,6 +230,7 @@ export const translations: Record<Language, TranslationDictionary> = {
         { question: "Nemen jullie materialen mee?", answer: "Dat kan. We stemmen vooraf af of we met eigen materialen werken of met middelen op locatie." },
         { question: "Hoe maken jullie de planning duidelijk?", answer: "Vooraf leggen we het tijdvak, team, takenlijst en contactpersoon vast zodat iedereen weet wat er gebeurt." },
         { question: "Doen jullie ook industriele schoonmaak?", answer: "Ja. Voor productieomgevingen stemmen we af op veiligheid, zones, werkvolgorde en momenten waarop het team toegang heeft." },
+        { question: "Doen jullie ook dieptereiniging?", answer: "Ja. Dieptereiniging is geschikt voor achterstallige schoonmaak, keukens, sanitair, vloeren en ruimtes die weer echt grondig fris moeten worden." },
       ],
     },
     contactSection: {
@@ -255,7 +264,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       },
       trustPoints: [...businessInfo.trustPoints],
       operationalNotes: [...businessInfo.operationalNotes],
-      serviceOptions: ["Kantoor", "Vakantiepark", "Evenement", "Bouwoplevering", "Industrieel / fabriek"],
+      serviceOptions: ["Kantoor", "Vakantiepark", "Evenement", "Bouwoplevering", "Industrieel / fabriek", "Dieptereiniging"],
       requestTypeOptions: ["Eenmalige schoonmaak", "Vaste schoonmaak", "Wisselschoonmaak", "Spoed of korte termijn", "Even overleggen wat past"],
       contactPreferenceOptions: ["Bel me even", "Mail me eerst", "Allebei is prima"],
     },
@@ -266,9 +275,9 @@ export const translations: Record<Language, TranslationDictionary> = {
     meta: {
       title: "Netjes & Klaar | خدمات تنظيف احترافية للمكاتب والمنتجعات والفعاليات وبيئات الإنتاج",
       description:
-        "Netjes & Klaar تقدم خدمات تنظيف احترافية للمكاتب والمنتجعات والفعاليات والعقارات بعد البناء وبيئات الإنتاج في هولندا مع تخطيط واضح وفريق معروف ونقاط تواصل ثابتة.",
+        "Netjes & Klaar تقدم خدمات تنظيف احترافية وتنظيف عميق وخدمات ما بعد البناء وبيئات الإنتاج في هولندا مع تخطيط واضح وفريق معروف ونقاط تواصل ثابتة.",
       schemaDescription:
-        "خدمات تنظيف احترافية للمكاتب والمنتجعات والفعاليات وأعمال التسليم النهائي وبيئات الإنتاج مع تخطيط واضح ونقطة تواصل ثابتة.",
+        "خدمات تنظيف احترافية وتنظيف عميق وأعمال التسليم النهائي وبيئات الإنتاج مع تخطيط واضح ونقطة تواصل ثابتة.",
       availableLanguages: ["Arabic", "Dutch"],
     },
     nav: {
@@ -283,7 +292,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     },
     hero: {
       title: "Netjes & Klaar",
-      subtitle: "تنظيف احترافي للمكاتب والمنتجعات والفعاليات.",
+      subtitle: "تنظيف احترافي وتنظيف عميق وخدمة ثابتة للمواقع التي يجب أن تبقى مرتبة فعلاً.",
       body: "تنظيم واضح ومواعيد ثابتة وفرق تعرف بالضبط ما الذي يجب عمله في كل موقع.",
       primaryCta: "احجز مكالمة قصيرة",
       secondaryCta: "شاهد الخدمات",
@@ -338,6 +347,14 @@ export const translations: Record<Language, TranslationDictionary> = {
           planning: "يتم التنسيق حسب الورديات وأوقات التوقف وقواعد السلامة والتنظيف لكل منطقة.",
           checklist: ["مسارات الحركة ومناطق العمل", "الآلات وما حولها", "الأرضيات ونقاط الغبار الحساسة", "التنسيق مع السلامة والإنتاج"],
         },
+        {
+          label: "تنظيف عميق",
+          service: "تنظيف عميق",
+          summary: "للمواقع التي لا يكفي أن تبدو مرتبة فقط، بل تحتاج إلى تنظيف فعلي عميق يزيل الدهون والترسبات والأوساخ المتراكمة.",
+          bestFor: "المطابخ والمرافق الصحية والأرضيات ومواعيد التسليم والتنظيف المتأخر والمساحات التي تحتاج إلى إعادة ضبط قوية.",
+          planning: "مرة واحدة أو بشكل دوري، وفي أوقات تسمح لنا بالعمل بعمق من دون إزعاج التشغيل.",
+          checklist: ["الدهون والترسبات والأوساخ المتراكمة", "الحواف والزوايا والأماكن الصعبة", "المرافق الصحية ومناطق المطبخ ونقاط اللمس", "استعادة الإحساس بالنظافة والمظهر الممثل"],
+        },
       ],
     },
     processSection: {
@@ -378,6 +395,7 @@ export const translations: Record<Language, TranslationDictionary> = {
         { question: "هل تجلبون المواد معكم؟", answer: "يمكن ذلك. نتفق مسبقاً إن كنا سنعمل بموادنا أو بمواد موجودة في الموقع." },
         { question: "كيف تجعلون التخطيط واضحاً؟", answer: "نثبت مسبقاً الفترة الزمنية والفريق وقائمة المهام ونقطة التواصل حتى يعرف الجميع ما سيحدث." },
         { question: "هل توفرون التنظيف الصناعي أيضاً؟", answer: "نعم. في بيئات الإنتاج ننسق حسب السلامة وتقسيم المناطق وتسلسل العمل والأوقات التي يمكن للفريق الدخول فيها." },
+        { question: "هل توفرون التنظيف العميق أيضاً؟", answer: "نعم. التنظيف العميق مناسب للتنظيف المتأخر والمطابخ والمرافق الصحية والأرضيات والمساحات التي تحتاج إلى استعادة النظافة بشكل فعلي." },
       ],
     },
     contactSection: {
@@ -414,7 +432,7 @@ export const translations: Record<Language, TranslationDictionary> = {
         { title: "متابعة على التنفيذ", text: "لا نترك الفرق بدون إشراف. نراجع ونوجه ونبقى منتبهين." },
       ],
       operationalNotes: ["تنظيف مرة واحدة أو جولات ثابتة", "متاح أيضاً خارج ساعات الدوام", "التخطيط حسب الموقع وطريقة استخدامه"],
-      serviceOptions: ["مكتب", "منتجع", "فعالية", "تسليم بعد البناء", "صناعي / مصنع"],
+      serviceOptions: ["مكتب", "منتجع", "فعالية", "تسليم بعد البناء", "صناعي / مصنع", "تنظيف عميق"],
       requestTypeOptions: ["تنظيف مرة واحدة", "تنظيف ثابت", "تنظيف تبديل", "طلب مستعجل أو قريب", "نراجع معاً ما الأنسب"],
       contactPreferenceOptions: ["اتصلوا بي", "ابدأوا بالبريد", "الطريقتان مناسبتان"],
     },

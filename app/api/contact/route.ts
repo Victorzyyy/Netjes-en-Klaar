@@ -29,6 +29,8 @@ export async function POST(request: Request) {
           empty: "غير مُدخل",
           labels: {
             name: "الاسم",
+            company: "الشركة",
+            audience: "نوع الطلب",
             contact: "التواصل",
             services: "الخدمات",
             requestType: "نوع الطلب",
@@ -47,6 +49,8 @@ export async function POST(request: Request) {
           empty: "Niet ingevuld",
           labels: {
             name: "Naam",
+            company: "Bedrijf",
+            audience: "Route",
             contact: "Contact",
             services: "Diensten",
             requestType: "Type aanvraag",
@@ -59,6 +63,8 @@ export async function POST(request: Request) {
 
   const payload = {
     name: value(formData, "name"),
+    company: value(formData, "company"),
+    audience: value(formData, "audience"),
     contact: value(formData, "contact"),
     services: values(formData, "services"),
     requestType: value(formData, "requestType"),
@@ -105,6 +111,8 @@ export async function POST(request: Request) {
       subject: `${copy.subjectPrefix} - ${payload.name}`,
       text: [
         `${copy.labels.name}: ${payload.name}`,
+        `${copy.labels.company}: ${payload.company || copy.empty}`,
+        `${copy.labels.audience}: ${payload.audience || copy.empty}`,
         `${copy.labels.contact}: ${payload.contact}`,
         `${copy.labels.services}: ${servicesLabel}`,
         `${copy.labels.requestType}: ${payload.requestType || copy.empty}`,
