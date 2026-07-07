@@ -9,6 +9,7 @@ import { PoppableSiteBubbles } from "@/components/poppable-site-bubbles";
 import { ProcessTimeline } from "@/components/process-timeline";
 import { ServiceSituationFlow } from "@/components/service-situation-flow";
 import { SiteHeader } from "@/components/site-header";
+import { TeamShowcaseImage } from "@/components/team-showcase-image";
 import { businessInfo } from "@/data/site-content";
 import { Language, translations } from "@/data/translations";
 
@@ -110,6 +111,8 @@ export function HomeLanguageShell() {
           </div>
         </div>
       </section>
+
+      <TeamShowcaseImage />
 
       <ContactCtaSection copy={copy.contactSection} language={language} />
     </main>

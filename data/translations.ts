@@ -12,6 +12,7 @@ export type TranslationDictionary = {
     availableLanguages: string[];
   };
   nav: {
+    home: string;
     services: string;
     process: string;
     contact: string;
@@ -121,6 +122,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       availableLanguages: ["Dutch", "Arabic"],
     },
     nav: {
+      home: "Home",
       services: "Diensten",
       process: "Werkwijze",
       contact: "Contact",
@@ -291,6 +293,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       availableLanguages: ["Arabic", "Dutch"],
     },
     nav: {
+      home: "الرئيسية",
       services: "الخدمات",
       process: "طريقة العمل",
       contact: "التواصل",

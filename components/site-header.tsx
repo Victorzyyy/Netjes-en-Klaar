@@ -20,6 +20,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
   const copy = translations[language];
   const isRtl = copy.dir === "rtl";
   const navItems = [
+    { label: copy.nav.home, href: isHome ? "#top" : "/" },
     { label: copy.nav.services, href: isHome ? "#diensten" : "/#diensten" },
     { label: copy.nav.process, href: isHome ? "#werkwijze" : "/#werkwijze" },
     { label: copy.nav.contact, href: "/contact" },
@@ -37,19 +38,24 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
 
   return (
     <header className="fresh-shell sticky top-3 z-40 pt-3">
-      <div className="fresh-card flex items-center justify-between gap-3 rounded-[1.75rem] px-4 py-3 sm:px-5 md:gap-4 lg:gap-5">
+      <div className="fresh-card flex items-center justify-between gap-3 rounded-[1.75rem] px-3 py-2.5 sm:px-4 md:gap-4 lg:gap-5">
         <div className="flex min-w-0 items-center justify-between gap-3">
-          <a href={isHome ? "#top" : "/"} className="flex min-w-0 items-center gap-3 text-sm font-black uppercase tracking-[0.18em] text-fresh-ink">
-            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-fresh-ink text-white shadow-glow">N</span>
-            <span className="truncate">Netjes & Klaar</span>
+          <a href={isHome ? "#top" : "/"} className="flex min-w-0 items-center">
+            <span className="sr-only">Netjes & Klaar</span>
+            <img
+              src="/images/netjes-en-klaar-logo.svg"
+              alt=""
+              aria-hidden="true"
+              className="h-14 w-auto max-w-[13.5rem] sm:h-16 sm:max-w-[16rem] md:h-14 md:max-w-[14.5rem] lg:h-16 lg:max-w-[18rem]"
+            />
           </a>
         </div>
 
-        <nav aria-label={copy.nav.mainNav} className="hidden min-w-0 items-center gap-1 text-sm font-bold text-[hsl(var(--muted))] md:flex">
+        <nav aria-label={copy.nav.mainNav} className="hidden min-w-0 items-center gap-0.5 text-sm font-bold text-[hsl(var(--muted))] md:flex lg:gap-1">
           {navItems.map((item) => (
             <a
               key={item.href}
-              className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 py-2.5 transition hover:bg-white/62 hover:text-fresh-ink lg:px-4"
+              className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full px-2.5 py-2.5 transition hover:bg-white/62 hover:text-[hsl(var(--brand-navy))] lg:px-3.5"
               href={item.href}
             >
               {item.label}
@@ -59,9 +65,6 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
           <LanguageSwitch language={language} onChange={changeLanguage} label={copy.nav.switchLabel} />
-          <a href={businessInfo.phoneHref} className="rounded-full bg-fresh-ink px-4 py-2.5 text-sm font-black text-white transition hover:bg-fresh-blue">
-            {copy.nav.callNow}
-          </a>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 md:hidden">
@@ -72,7 +75,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? copy.nav.closeMenu : copy.nav.openMenu}
-            className="grid size-10 place-items-center rounded-full bg-fresh-ink text-white shadow-fresh transition hover:bg-fresh-blue"
+            className="grid size-10 place-items-center rounded-full bg-[hsl(var(--brand-navy))] text-white shadow-fresh transition hover:bg-fresh-blue"
           >
             {isMenuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
@@ -81,7 +84,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
 
       <div
         className={
-          "fixed inset-0 z-40 bg-fresh-ink/14 transition md:hidden " +
+          "fixed inset-0 z-40 bg-[hsl(var(--brand-navy)/0.14)] transition md:hidden " +
           (isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0")
         }
         onClick={() => setIsMenuOpen(false)}
@@ -96,12 +99,12 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
         }
       >
         <div className="mb-2 flex items-center justify-between px-1">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-fresh-ink/55">{copy.nav.menu}</p>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-[hsl(var(--brand-navy)/0.55)]">{copy.nav.menu}</p>
           <button
             type="button"
             onClick={() => setIsMenuOpen(false)}
             aria-label={copy.nav.closeMenu}
-            className="grid size-9 place-items-center rounded-full bg-fresh-cloud text-fresh-ink transition hover:bg-fresh-ink hover:text-white"
+            className="grid size-9 place-items-center rounded-full bg-fresh-cloud text-[hsl(var(--brand-navy))] transition hover:bg-[hsl(var(--brand-navy))] hover:text-white"
           >
             <X size={18} />
           </button>
@@ -113,7 +116,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
               key={item.href}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-between rounded-[1.1rem] px-4 py-3.5 text-base font-bold text-fresh-ink transition hover:bg-fresh-cloud"
+              className="flex items-center justify-between rounded-[1.1rem] px-4 py-3.5 text-base font-bold text-[hsl(var(--brand-navy))] transition hover:bg-fresh-cloud"
             >
               {item.label}
             </a>
@@ -123,7 +126,7 @@ export function SiteHeader({ language, onLanguageChange, isHome = false }: SiteH
         <a
           href={businessInfo.phoneHref}
           onClick={() => setIsMenuOpen(false)}
-          className="mt-2 flex items-center justify-center gap-2 rounded-full bg-fresh-ink px-5 py-3 text-sm font-black text-white transition hover:bg-fresh-blue"
+          className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[hsl(var(--brand-navy))] px-5 py-3 text-sm font-black text-white transition hover:bg-fresh-blue"
         >
           <Phone size={17} />
           {copy.nav.callNow}
@@ -143,14 +146,14 @@ function LanguageSwitch({
   label: string;
 }) {
   return (
-    <div className="flex items-center gap-1 rounded-full border border-fresh-blue/18 bg-white/78 p-1 shadow-[0_16px_40px_-28px_rgba(21,86,112,0.24)]">
+    <div className="flex items-center gap-0.5 rounded-full border border-fresh-blue/18 bg-white/78 p-0.5 shadow-[0_16px_40px_-28px_rgba(21,86,112,0.24)]">
       <span className="sr-only">{label}</span>
       <button
         type="button"
         onClick={() => onChange("nl")}
         className={
-          "rounded-full px-3 py-2 text-xs font-bold transition sm:px-4 " +
-          (language === "nl" ? "bg-fresh-ink text-white shadow-fresh" : "text-fresh-ink/70 hover:bg-white hover:text-fresh-ink")
+          "rounded-full px-2.5 py-1.5 text-[0.68rem] font-black transition sm:px-3 " +
+          (language === "nl" ? "bg-[hsl(var(--brand-navy))] text-white shadow-fresh" : "text-[hsl(var(--brand-navy)/0.7)] hover:bg-white hover:text-[hsl(var(--brand-navy))]")
         }
       >
         NL
@@ -159,11 +162,11 @@ function LanguageSwitch({
         type="button"
         onClick={() => onChange("ar")}
         className={
-          "rounded-full px-3 py-2 text-xs font-bold transition sm:px-4 " +
-          (language === "ar" ? "bg-fresh-ink text-white shadow-fresh" : "text-fresh-ink/70 hover:bg-white hover:text-fresh-ink")
+          "rounded-full px-2.5 py-1.5 text-[0.68rem] font-black transition sm:px-3 " +
+          (language === "ar" ? "bg-[hsl(var(--brand-navy))] text-white shadow-fresh" : "text-[hsl(var(--brand-navy)/0.7)] hover:bg-white hover:text-[hsl(var(--brand-navy))]")
         }
       >
-        العربية
+        AR
       </button>
     </div>
   );
