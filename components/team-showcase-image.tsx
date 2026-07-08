@@ -10,7 +10,7 @@ export function TeamShowcaseImage() {
             alt="Vriendelijk schoonmaakteam met professionele schoonmaakmiddelen"
             fill
             sizes="(max-width: 768px) 100vw, 86rem"
-            className="object-cover object-center"
+            className="object-cover object-[center_42%] md:object-[center_38%]"
             priority={false}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-fresh-ink/18 via-transparent to-white/8" />

@@ -79,6 +79,8 @@ export function HomeLanguageShell() {
         <ServiceSituationFlow copy={copy.servicesSection} />
       </section>
 
+      <TeamShowcaseImage />
+
       <section id="werkwijze" className="fresh-shell relative z-10 py-24 md:py-28">
         <div className="mx-auto max-w-3xl space-y-5 text-center">
           <p className="section-kicker">{copy.processSection.kicker}</p>
@@ -111,8 +113,6 @@ export function HomeLanguageShell() {
           </div>
         </div>
       </section>
-
-      <TeamShowcaseImage />
 
       <ContactCtaSection copy={copy.contactSection} language={language} />
     </main>
